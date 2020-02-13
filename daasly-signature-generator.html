@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap' rel='stylesheet'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Daasly Signature Generator</title>
+</head>
+<style>
+html {
+  padding: 15px;
+}
+body {
+  display: flex;
+  margin-top: 45px;
+}
+.card {
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  margin: 0 85px 0 15px;
+}
+button {
+   max-width: 10rem;
+}
+</style>
+  <body>
+    <form class="card">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="name" class="form-control" id="firstName">
+      </div>
+      <div class="form-group">
+        <label for="middleName">Middle Name</label>
+        <input type="name" class="form-control" id="middleName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="name" class="form-control" id="lastName">
+      </div>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="title" class="form-control" id="title">
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="phone" class="form-control" id="phoneNumber">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>  
+    <!-- EMAIL SIGNATURE HTML SNIPPET START -->
+    <table style='width:max-content;text-align:left;'>
+      <tr>
+        <td style='margin: auto 0 auto 0;'>
+            <a  href='https://www.daasly.com' 
+                target='_blank'
+                style='height:fit-content;width:fit-content;'>
+              <img  src='https://storage.googleapis.com/daasly_public/Gold%20Thumbnail.png' 
+                    alt='Daasly Logo'
+                    style='height: 3.75em;width: 3.75rem;'/>
+            </a>
+          </div>
+        </td>
+        <td style='margin: auto 0 auto 0;'>
+            <div  style="font-family: 'Roboto', sans-serif;font-weight: 700;font-size: .8rem;width: max-content;">
+              <span id="userFirstName">
+                First
+              </span> 
+              <span id="userMiddleName">
+                M.
+              </span>
+              <span id="userLastName">
+                Last
+              </span>
+            </div>
+            <div  id="userTitle" 
+                  style="font-family: 'Open Sans', sans-serif;font-weight: 400;font-size: 0.75rem;width: max-content;">
+              Title | Daasly, Inc.
+            </div>
+            <a  id="userPhone"
+                href=''
+                style="font-family: 'Open Sans', sans-serif;font-weight: 400;font-size: 0.75rem;text-decoration: none;width: max-content;">
+              (888) 888-8888
+            </a>
+        </td>
+      </tr>
+    </table>
+    <!-- HTML SIGNATURE SNIPPET END -->
+    <script>
+      const userFirstName = document.querySelector("#userFirstName")
+      const userMiddleName = document.querySelector("#userMiddleName")
+      const userLastName = document.querySelector("#userLastName")
+      const userTitle = document.querySelector("#userTitle")
+      const userPhone = document.querySelector("#userPhone")
+      const button = document.querySelector('button')
+
+      function fetchInfo() {
+          const firstName = document.querySelector('#firstName').value
+          const middleName = document.querySelector('#middleName').value
+          const lastName = document.querySelector('#lastName').value
+          const title = document.querySelector('#title').value
+          const phoneNumber = document.querySelector('#phoneNumber').value.replace(/(,|[^\d.-]+)+/g, '')
+          userFirstName.textContent = firstName
+          userMiddleName.textContent = middleName.charAt(0) + '.'
+          userLastName.textContent = lastName
+          userTitle.textContent = title + ' | Daasly, Inc.'
+          userPhone.textContent = '(' 
+                                  + phoneNumber.substring(0,3) 
+                                  + ') ' 
+                                  + phoneNumber.substring(3,6) 
+                                  + '-' 
+                                  + phoneNumber.substring(6,10)
+          userPhone.href= 'tel:' + phoneNumber
+          console.log(phoneNumber)
+          event.preventDefault()
+        }
+
+        button.addEventListener('click', fetchInfo)
+    </script>
+  </body>
+</html>
